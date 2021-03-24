@@ -1,0 +1,41 @@
+version: '3.8'
+services:
+  pc1:
+    container_name: pc1
+    build: 
+      context: ./pc1
+      dockerfile: ./Dockerfile
+    environment: 
+      - USUARIO=luis
+      - PASSWD=1234
+    networks: 
+      netansible:
+          ipv4_address: 192.168.1.2
+  pc2:
+    container_name: pc2
+    build: 
+      context: ./pc2
+      dockerfile: ./Dockerfile
+    environment: 
+      - USUARIO=luis
+      - PASSWD=1234
+    networks: 
+      netansible:
+          ipv4_address: 192.168.1.3
+  #pc3:
+    #container_name: pc3
+    #build: 
+      #context: ./pc3
+      #dockerfile: ./Dockerfile
+    #environment: 
+      #- USUARIO=luis
+      #- PASSWD=1234
+    #networks: 
+      #netansible:
+          #ipv4_address: 192.168.1.4
+networks: 
+  netansible:
+      ipam: 
+          driver: default
+          config: 
+              - subnet: 192.168.1.0/24
